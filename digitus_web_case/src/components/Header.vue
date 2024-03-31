@@ -18,7 +18,7 @@
           <h1>MomTalk</h1>
       </div>
       <div class="items-center justify-between flex flex-row">
-        <div class="hidden flex-row sm:hidden md:hidden lg:flex xl:flex 2xl:flex">
+        <div class="hidden flex-row sm:hidden md:flex lg:flex xl:flex 2xl:flex">
           <img src="/assets/icons/search.svg" alt="logo" class="h-12"/>
           <img src="/assets/icons/line.svg" alt="logo" class="h-12"/>
           <img src="/assets/icons/inbox.svg" alt="logo" class="h-12"/>
@@ -26,7 +26,7 @@
           <img src="/assets/icons/line.svg" alt="logo" class="h-12"/>
         </div>
         <div class="items-center justify-between flex flex-row">
-          <img src="/assets/images/profile_picture.png" alt="logo" class="h-12 object-cover rounded-full border-4 border-purple"/>
+          <img src="/assets/images/profile_picture.png" alt="logo" class="h-12 object-cover rounded-full border-4 border-purple-100"/>
           <img src="/assets/icons/arrow.svg" alt="logo" class="h-12"/>
         </div>
       </div>
