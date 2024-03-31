@@ -19,12 +19,12 @@ export default {
   <div class="h-full w-full">
     <Header/>
     <div class="pt-24 flex flex-row">
-      <div class="w-full space-y-12">
+      <div class="w-1/6"></div>
+      <div class=" w-2/6 sm:w-2/3 md:w-1/2 lg:w-1/2 xl:w-1/3 2xl:w-1/3  space-y-12">
         <MessageBox/>
         <Cards/>
       </div>
-      <div class="w-1/2">
-        
+      <div class="w-3/12">
       </div>
     </div>
   </div>

@@ -35,7 +35,7 @@ export default {
 </script>
 
 <template>
-    <div class="bg-orange-200 flex flex-col p-4 text-center justify-center items-center rounded-xl space-y-4 ">
+    <div class="bg-gray-200 flex flex-col p-4 text-center justify-center items-center rounded-xl space-y-4 ">
         <div class="flex flex-row w-full">
             <div class="flex w-full justify-center">
                 <h1>Members You May Know</h1>
