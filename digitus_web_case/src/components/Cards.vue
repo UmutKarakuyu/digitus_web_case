@@ -1,13 +1,27 @@
 <script >
 import Suggestions from './Suggestions.vue';
+import { Carousel, Navigation, Slide} from 'vue3-carousel';
+import { ArrowLeft, ArrowRight } from '@iconoir/vue';
+import 'vue3-carousel/dist/carousel.css'
 
 export default {
     name: 'Cards',
     components: {
         Suggestions,
+        Carousel,
+        Navigation,
+        Slide,
+        ArrowLeft,
+        ArrowRight,
     },
     data() {
         return {
+            currentSlide: 0,
+            carouselSettings: {
+                itemsToScroll: 1,  
+                itemsToShow: 1,
+                snapAlign: 'center',
+            },
             card:[
                 {
                     id: 1,
@@ -15,7 +29,10 @@ export default {
                     avatar:
                         '/assets/images/avatar1.png',
                     role: 'Medical Doctor',
-                    pictures:'/assets/images/picture1.png',
+                    
+                    pictures:[
+                        '/assets/images/picture1.png', '/assets/images/picture2.png', '/assets/images/picture3.png',
+                    ],
                     likeCount: 3,
                     shareCount: 1,
                     isLiked:false,
@@ -37,7 +54,7 @@ export default {
                     avatar:
                         '/assets/images/avatar5.png',
                     role: null,
-                    pictures:'/assets/images/picture2.png',
+                    pictures:['/assets/images/picture2.png'],
                     likeCount: 24,
                     shareCount: 0,
                     isLiked:true,
@@ -81,7 +98,7 @@ export default {
                     avatar:
                         '/assets/images/avatar1.png',
                     role: 'Medical Doctor',
-                    pictures: '/assets/images/picture3.png',
+                    pictures: ['/assets/images/picture3.png'],
                     likeCount: 3,
                     shareCount: 1,
                     isLiked:false,
@@ -103,7 +120,7 @@ export default {
                     avatar:
                         '/assets/images/avatar6.png',
                     role: 'SPONSORED',
-                    pictures: '/assets/images/picture4.png',
+                    pictures: ['/assets/images/picture4.png'],
                     likeCount: 3,
                     shareCount: 1,
                     isLiked:false,
@@ -125,7 +142,7 @@ export default {
                     avatar:
                         '/assets/images/avatar1.png',
                     role: 'Medical Doctor',
-                    pictures: '/assets/images/picture3.png',
+                    pictures: ['/assets/images/picture3.png'],
                     likeCount: 3,
                     shareCount: 1,
                     isLiked:false,
@@ -189,7 +206,33 @@ export default {
                 <div class="flex flex-col space-y-4">
                     <div class="flex flex-col">
                         <div v-if="item.role !== 'SPONSORED'" class="h-1 w-full bg-gradient-to-r from-yellow-500 via-green-500 to-blue-500 border-transparent "></div>
-                        <img v-if="item.pictures !== null" :src="item.pictures" alt="logo" class="w-full object-cover"/>
+                        <div v-if="item?.pictures && item.pictures.length > 1" class="w-full h-full object-cover">
+                           <Carousel
+                                :itemsToShow="carouselSettings.itemsToShow"
+                                :itemsToScroll="carouselSettings.itemsToScroll"
+                                :snapAlign="carouselSettings.snapAlign"
+                                :wrapAround="true"
+                                :mouseDrag="true"
+                                :touchDrag="true"
+                                ref="carousel"
+                                v-model="currentSlide"
+                            >
+                                <Slide v-for="(photo, index) in item.pictures" :key="index">
+                                    <div class="justify-center items-center">
+                                        <img
+                                        :src="photo"
+                                        alt="carousel image"
+                                        class="object-cover w-full"
+                                        />
+                                    </div>
+                                </Slide>
+
+                                <template #addons >
+                                    <Navigation />
+                                </template>
+                            </Carousel> 
+                        </div> 
+                        <img v-else="item.pictures !== null" :src="item.pictures" alt="logo" class="w-full object-cover"/>
                     </div>
                     <div class="flex flex-row justify-between">
                         <div class="flex flex-row space-x-4">
