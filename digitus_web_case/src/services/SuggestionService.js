@@ -33,6 +33,27 @@ const suggestionServices = {
                 role: null,
                 location:'İzmir',
             }, 
+            {
+                id: 4,
+                name: "Ahmet Yılmaz",
+                avatar:'/assets/images/avatar2.png',
+                role: 'Medical Doctor',
+                location:'İzmir',
+            }, 
+            {
+                id: 5,
+                name: "Melike Kadıoğlu",
+                avatar:'/assets/images/avatar3.png',
+                role: null,
+                location:'İzmir',
+            }, 
+            {
+                id: 6,
+                name: "Ayşe Yıldırım",
+                avatar:'/assets/images/avatar4.png',
+                role: null,
+                location:'İzmir',
+            }, 
         ];
     },
 };
