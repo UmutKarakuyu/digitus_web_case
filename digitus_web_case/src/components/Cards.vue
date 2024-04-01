@@ -2,6 +2,7 @@
 import Suggestions from './Suggestions.vue';
 import { Carousel, Navigation, Slide} from 'vue3-carousel';
 import 'vue3-carousel/dist/carousel.css'
+import cardServices from '../services/CardService.js';
 
 export default {
     name: 'Cards',
@@ -19,144 +20,11 @@ export default {
                 itemsToShow: 1,
                 snapAlign: 'center',
             },
-            card:[
-                {
-                    id: 1,
-                    name: "Ahmet Yıldız Kenter",
-                    avatar:
-                        '/assets/images/avatar1.png',
-                    role: 'Medical Doctor',
-                    
-                    pictures:[
-                        '/assets/images/picture1.png', '/assets/images/picture2.png', '/assets/images/picture3.png',
-                    ],
-                    likeCount: 3,
-                    shareCount: 1,
-                    isLiked:false,
-                    isBookmarked: false,
-                    viewCount: 4,
-                    minCount: 2,
-                    commentCount: 5,
-                    description: 'Normal healthy 21 y/o patient came in presenting odd symptoms. Patient described a new set of symptoms they all get well...',
-                    tags: [
-                        'child',
-                        'doctor',
-                        'hospital',
-                        'fever'
-                    ],
-                },
-                {
-                    id: 2,
-                    name: "Derya Deniz",
-                    avatar:
-                        '/assets/images/avatar5.png',
-                    role: null,
-                    pictures:['/assets/images/picture2.png'],
-                    likeCount: 24,
-                    shareCount: 0,
-                    isLiked:true,
-                    isBookmarked: true,
-                    viewCount: 4,
-                    minCount: 2,
-                    commentCount: 5,
-                    description: 'The mom said she struggled with fertility issues and had an ectopic pregnancy after giving birth to her daughter.',
-                    tags: [
-                        'child',
-                        'doctor',
-                        'hospital',
-                        'fever'
-                    ],
-                },
-                {
-                    id: 3,
-                    name: "Dr. Ahmet Yıldız Kenter",
-                    avatar:
-                        '/assets/images/avatar1.png',
-                    role: 'Medical Doctor',
-                    pictures: null,
-                    likeCount: 1,
-                    shareCount: 0,
-                    isLiked:false,
-                    isBookmarked: false,
-                    viewCount: 4,
-                    minCount: 2,
-                    commentCount: 5,
-                    description: 'The mom said she struggled with fertility issues and had an ectopic pregnancy after giving birth to her daughter.',
-                    tags: [
-                        'child',
-                        'doctor',
-                        'hospital',
-                        'fever'
-                    ],
-                },
-                {
-                    id: 4,
-                    name: "Dr. Ahmet Yıldız Kenter",
-                    avatar:
-                        '/assets/images/avatar1.png',
-                    role: 'Medical Doctor',
-                    pictures: ['/assets/images/picture3.png'],
-                    likeCount: 3,
-                    shareCount: 1,
-                    isLiked:false,
-                    isBookmarked: false,
-                    viewCount: 4,
-                    minCount: 2,
-                    commentCount: 5,
-                    description: 'Normal healthy 21 y/o patient came in presenting odd symptoms. Patient described a new set of symptoms they all get well...',
-                    tags: [
-                        'child',
-                        'doctor',
-                        'hospital',
-                        'fever'
-                    ],
-                },
-                {
-                    id: 5,
-                    name: "Milupa",
-                    avatar:
-                        '/assets/images/avatar6.png',
-                    role: 'SPONSORED',
-                    pictures: ['/assets/images/picture4.png'],
-                    likeCount: 3,
-                    shareCount: 1,
-                    isLiked:false,
-                    isBookmarked: false,
-                    viewCount: 4,
-                    minCount: 2,
-                    commentCount: 5,
-                    description: 'Normal healthy 21 y/o patient came in presenting odd symptoms. Patient described a new set of symptoms they all get well...',
-                    tags: [
-                        'child',
-                        'doctor',
-                        'hospital',
-                        'fever'
-                    ],
-                },  
-                {
-                    id: 6,
-                    name: "Dr. Ahmet Yıldız Kenter",
-                    avatar:
-                        '/assets/images/avatar1.png',
-                    role: 'Medical Doctor',
-                    pictures: ['/assets/images/picture3.png'],
-                    likeCount: 3,
-                    shareCount: 1,
-                    isLiked:false,
-                    isBookmarked: false,
-                    viewCount: 4,
-                    minCount: 2,
-                    commentCount: 5,
-                    description: 'Maecenas pulvinar nulla eu nibh imperdiet, et ullamcorper metus interdum. Duis vehicula quam non tempor viverra. Quisque sit amet commodo sem. Quisque eu cursus libero. Suspendisse cursus magna dui, id condimentum mi rutrum ac. Sed eget orci at tortor iaculis pretium. Duis in feugiat odio, a faucibus nisi. Maecenas et sollicitudin ipsum, porta accumsan dui. Maecenas malesuada suscipit ligula vitae dignissim. Curabitur eu lacinia enim. Fusce lectus lorem, ultrices ut arcu sed, gravida elementum lectus. Ut lobortis ullamcorper neque, et faucibus sem pellentesque ac.',
-                    tags: [
-                        'child',
-                        'doctor',
-                        'hospital',
-                        'fever'
-                    ],
-                },                 
-            ],
+            cards: [],
         }
+    },
+    mounted() {
+        this.getCardData();
     },
     methods: {
         toggleLike(item) {
@@ -170,12 +38,31 @@ export default {
         toggleBookmark(item) {
             item.isBookmarked = !item.isBookmarked;
         },
-  }
+        getCardData() {
+            const response = cardServices.getCards();
+            this.cards = response.map(card => ({
+                id: card.id,
+                name: card.name,
+                avatar: card.avatar,
+                role: card.role,
+                pictures: card.pictures,
+                likeCount: card.likeCount,
+                shareCount: card.shareCount,
+                isLiked: card.isLiked,
+                isBookmarked: card.isBookmarked,
+                viewCount: card.viewCount,
+                minCount: card.minCount,
+                commentCount: card.commentCount,
+                description: card.description,
+                tags: card.tags,
+            }));
+        }
+    }
 }
 </script>
 <template>
     <div class=" flex flex-col pt-4 space-y-12">
-        <div v-for="item in card" :key="item.id" >
+        <div v-for="item in cards" :key="item.id" >
             <div v-if="item.id === 2 " class="pb-12"> <Suggestions/></div>
             <div class="bg-white flex flex-col mt-2 mb-2 rounded-xl space-y-1">
                 <div :class="{'bg-gradient-to-r from-purple-200 to-blue-300 border-transparent ': item.role === 'SPONSORED', 'bg-white': item.role !== 'SPONSORED'}" class="flex flex-row justify-between px-4">

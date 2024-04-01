@@ -29,13 +29,13 @@
           <img src="/assets/icons/search.svg" alt="logo" class="h-12"/>
           <img src="/assets/icons/line.svg" alt="logo" class="h-12"/>
           <div class="relative">
-            <img src="/assets/icons/inbox.svg" alt="logo" class="h-12"/>
+            <img src="/assets/icons/inbox.svg" alt="logo" class="h-16"/>
               <div class="absolute top-0 right-0 transform translate-x-1/4 -translate-y-1/4 bg-red-500 h-6 w-6 rounded-full flex items-center justify-center">
                 <span class="text-white font-semibold">{{ inboxCount }}</span>
             </div>
           </div>
           <div class="relative">
-            <img src="/assets/icons/bell.svg" alt="logo" class="h-12"/>
+            <img src="/assets/icons/bell.svg" alt="logo" class="h-16"/>
               <div class="absolute top-0 right-0 transform translate-x-1/4 -translate-y-1/4 bg-red-500 h-6 w-6 rounded-full flex items-center justify-center">
                 <span class="text-white font-semibold">{{ notificationCount }}</span>
             </div>

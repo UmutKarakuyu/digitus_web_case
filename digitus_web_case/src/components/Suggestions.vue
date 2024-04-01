@@ -1,36 +1,27 @@
 <script >
+import suggestionServices from '../services/SuggestionService.js';
 export default {
     name: 'Cards',
     data() {
         return {
-            people:[
-                {
-                    id: 1,
-                    name: "Ahmet Yılmaz",
-                    avatar:'/assets/images/avatar2.png',
-                    role: 'Medical Doctor',
-                    location:'İzmir',
-                }, 
-                {
-                    id: 2,
-                    name: "Melike Kadıoğlu",
-                    avatar:'/assets/images/avatar3.png',
-                    role: null,
-                    location:'İzmir',
-                }, 
-                {
-                    id: 3,
-                    name: "Ayşe Yıldırım",
-                    avatar:'/assets/images/avatar4.png',
-                    role: null,
-                    location:'İzmir',
-                }, 
-
-            ],
+            people:[],
         }
     },
+    mounted() {
+      this.getSuggestionData();  
+    },
     methods: {
-  }
+        getSuggestionData() {
+            const response = suggestionServices.getSuggestions();
+            this.people = response.map(person => ({
+                id: person.id,
+                name: person.name,
+                avatar: person.avatar,
+                role: person.role,
+                location: person.location,
+            }));
+        }
+    }
 }
 </script>
 

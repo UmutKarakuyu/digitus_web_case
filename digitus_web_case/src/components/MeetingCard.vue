@@ -1,6 +1,7 @@
 <script >
 import { Carousel, Pagination, Slide} from 'vue3-carousel';
 import 'vue3-carousel/dist/carousel.css'
+import meetingCardServices from '../services/MeetingCardService.js';
 
 export default {
     name: 'MeetingCard',
@@ -17,49 +18,23 @@ export default {
                 itemsToShow: 1,
                 snapAlign: 'start',
             },
-            card:[
-                {
-                    id: 1,
-                    name: "Momsista",
-                    type: 'Family Meeting',
-                    date: 'July’19',
-                    picture:'/assets/images/picture7.png',
-                },
-                {
-                    id: 2,
-                    name: "Momsista",
-                    type: 'Family Meeting',
-                    date: 'August’19',
-                    picture:'/assets/images/picture7.png',
-                },
-                {
-                    id: 3,
-                    name: "Momsista",
-                    type: 'Family Meeting',
-                    date: 'September’19',
-                    picture:'/assets/images/picture7.png',
-                },
-                {
-                    id: 4,
-                    name: "Momsista",
-                    type: 'Family Meeting',
-                    date: 'October’19',
-                    picture:'/assets/images/picture7.png',
-                },
-            ],
+            card:[],
         }
     },
+    mounted() {
+        this.getMeetingCardData();
+    },
     methods: {
-        customDotClass(dotIndex) {
-            // Define custom styles for pagination dots
-            return {
-                'bg-purple-500': true, // Background color purple
-                'rounded-full': true, // Circular shape
-                'w-4': true, // Width
-                'h-4': true, // Height
-                'mx-2': true, // Margin
-            };
-        },
+        getMeetingCardData() {
+            const response = meetingCardServices.getMeetingCards();
+            this.card = response.map(card => ({
+                id: card.id,
+                name: card.name,
+                type: card.type,
+                date: card.date,
+                picture: card.picture,
+            }));
+        }
     },
 }
 </script>
@@ -91,10 +66,7 @@ export default {
 
             <template #addons >
                 <Pagination 
-                :dot-class="customDotClass"
                 class="mt-8 flex justify-center space-x-1"/>
-            
-                    
             </template>
 
         </Carousel> 
