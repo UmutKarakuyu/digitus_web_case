@@ -4,6 +4,7 @@ import MessageBox from '../components/MessageBox.vue'
 import Cards from '../components/Cards.vue'
 import Suggestions from '../components/Suggestions.vue'
 import SidebarCards from '../components/SidebarCards.vue'
+import MeetingCard from '../components/MeetingCard.vue'
 
 
 export default {
@@ -12,7 +13,8 @@ export default {
     MessageBox,
     Cards,
     Suggestions,
-    SidebarCards
+    SidebarCards,
+    MeetingCard
   }
 }
 </script>
@@ -25,8 +27,9 @@ export default {
         <MessageBox/>
         <Cards/>
       </div>
-      <div class="w-4/12">
+      <div class="w-4/12 space-y-28">
         <SidebarCards/>
+        <MeetingCard/>
       </div>
     </div>
   </div>

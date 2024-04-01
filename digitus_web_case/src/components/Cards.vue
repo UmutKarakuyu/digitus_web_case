@@ -1,7 +1,6 @@
 <script >
 import Suggestions from './Suggestions.vue';
 import { Carousel, Navigation, Slide} from 'vue3-carousel';
-import { ArrowLeft, ArrowRight } from '@iconoir/vue';
 import 'vue3-carousel/dist/carousel.css'
 
 export default {
@@ -11,8 +10,6 @@ export default {
         Carousel,
         Navigation,
         Slide,
-        ArrowLeft,
-        ArrowRight,
     },
     data() {
         return {
@@ -207,6 +204,7 @@ export default {
                     <div class="flex flex-col">
                         <div v-if="item.role !== 'SPONSORED'" class="h-1 w-full bg-gradient-to-r from-yellow-500 via-green-500 to-blue-500 border-transparent "></div>
                         <div v-if="item?.pictures && item.pictures.length > 1" class="w-full h-full object-cover">
+                            
                            <Carousel
                                 :itemsToShow="carouselSettings.itemsToShow"
                                 :itemsToScroll="carouselSettings.itemsToScroll"
@@ -216,9 +214,16 @@ export default {
                                 :touchDrag="true"
                                 ref="carousel"
                                 v-model="currentSlide"
+                                class="z-50"
                             >
                                 <Slide v-for="(photo, index) in item.pictures" :key="index">
-                                    <div class="justify-center items-center">
+                                    <div class="z-50 justify-center items-center">
+                                        <div class=" absolute top-10 right-5 transform translate-x-1/4 -translate-y-1/4 items-center">
+                                        <img src="/assets/icons/pages.svg" alt="logo" class="h-8"/>
+                                    </div>
+                                    <div class="absolute top-11 right-6 transform translate-x-1/4 -translate-y-1/4 items-center ">
+                                        <h1 class="text-white ">{{ item.pictures.length }}</h1>
+                                    </div>
                                         <img
                                         :src="photo"
                                         alt="carousel image"
