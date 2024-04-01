@@ -10,7 +10,7 @@
 </script>
 
 <template>
-  <div class="fixed w-full items-center justify-between flex flex-row bg-white">
+  <div class=" absolute w-full items-center justify-between flex flex-row bg-white">
 
       <div class="w-1/6 flex justify-between items-center">
         <img src="/assets/images/logo.png" alt="logo" class="h-full sm:h-full md:h-16 lg:h-16 xl:h-16 2xl:h-16"/>
