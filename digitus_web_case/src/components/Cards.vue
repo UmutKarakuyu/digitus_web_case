@@ -90,7 +90,7 @@ export default {
                 <div class="flex flex-col space-y-4">
                     <div class="flex flex-col">
                         <div v-if="item.role !== 'SPONSORED'" class="h-1 w-full bg-gradient-to-r from-yellow-500 via-green-500 to-blue-500 border-transparent "></div>
-                        <div v-if="item?.pictures && item.pictures.length > 1" class="w-full h-full object-cover">
+                        <div v-if="item?.pictures && item.pictures.length > 1" class="w-fit h-fit  object-cover">
                             
                            <Carousel
                                 :itemsToShow="carouselSettings.itemsToShow"
@@ -124,7 +124,7 @@ export default {
                                 </template>
                             </Carousel> 
                         </div> 
-                        <img v-else="item.pictures !== null" :src="item.pictures" alt="logo" class="w-full object-cover"/>
+                        <img v-else-if="item?.pictures" :src="item.pictures" alt="logo" class="w-full object-cover"/>
                     </div>
                     <div class="flex flex-row justify-between">
                         <div class="flex flex-row space-x-4">
