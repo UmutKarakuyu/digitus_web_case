@@ -4,8 +4,22 @@ const baseURL = 'base_url';
 
 const token = 'token';// could implement a token based authentication
 
+const headers = { // assuming that the token is a bearer token
+    Authorization: `Bearer ${token}`,
+    'Content-Type': 'application/json',
+};
 
 const cardServices = {
+    async postCard(body) {
+        try {
+          const response = await axios.post(`${baseURL}/Card`, body, { headers });
+    
+          return response.data;
+        } catch (error) {
+          throw error;
+        }
+      },
+
     getCards() {
         /*
         return axios.get(`${baseURL}/cards`);
