@@ -1,9 +1,12 @@
 <script >
 import cardServices from '../services/CardService.js';
 import profileServices from '../services/ProfileServices.js';
-
+import Alert from './Alert.vue';
 export default {
     name: 'MessageBox',
+    components: {
+        Alert,
+    },
     data() {
         return {
             user:{
@@ -12,8 +15,18 @@ export default {
                 avatar: "",
                 role: "",
             },
-            card:{}
+            card:{},
+            isAlertVisible: false,
         }
+    },
+    watch: {
+        isAlertVisible(newVal) {
+        if (newVal) {
+            setTimeout(() => {
+            this.isAlertVisible = false;
+            }, 3000); 
+        }
+        },
     },
     methods: {
         getProfileData() {
@@ -43,10 +56,13 @@ export default {
                 tags: null,
             }
             cardServices.postCard(body).catch((error) => {
-                console.log("Alert");
+                this.isAlertVisible = true;
             });
-
-        }
+        },
+        showAlert() {
+            console.log("show alert")
+            this.isAlertVisible = true;
+        },
     }
 }
 </script>
@@ -58,7 +74,7 @@ export default {
             <input v-model="this.card.description" placeholder="Write something, Merve" class="w-full bg-gray-100 pl-8 text-xl"/>
         </div>
         <div class="flex flex-row justify-end space-x-4">
-            <img src="/assets/icons/smile_emoji.svg" alt="logo" class="h-8"/>
+            <img @click="showAlert" src="/assets/icons/smile_emoji.svg" alt="logo" class="h-8"/>
             <img src="/assets/icons/plus.svg" alt="logo" class="h-8" @click="postMessage()"/>
         </div>
     </div>

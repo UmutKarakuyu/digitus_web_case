@@ -1,7 +1,8 @@
 <script >
 import suggestionServices from '../services/SuggestionService.js';
 import { Carousel, Navigation, Slide} from 'vue3-carousel';
-import 'vue3-carousel/dist/carousel.css'
+import 'vue3-carousel/dist/carousel.css';
+import { ArrowLeft, ArrowRight } from '@iconoir/vue';
 
 export default {
     name: 'Cards',
@@ -9,6 +10,8 @@ export default {
         Carousel,
         Navigation,
         Slide,
+        ArrowLeft,
+        ArrowRight,
     },
     data() {
         return {
@@ -40,14 +43,14 @@ export default {
 </script>
 
 <template>
-    <div class="bg-gray-200 flex flex-col text-center justify-center items-center rounded-xl space-y-4">
-        <div class="flex flex-row w-full p-4">
-            <div class="flex w-full justify-center">
+    <div class="bg-gray-200 flex flex-col text-center items-end rounded-xl ">
+        <div class="relative flex flex-row  p-4 items-center w-full ">
+            <div class="flex-1 w-full justify-center text-gray-500 text-base font-bold ">
                 <h1>Members You May Know</h1>
             </div>
-            <h1 class="whitespace-nowrap">SEE ALL</h1>
+            <h1 class="absolute top-0 right-0 p-4 whitespace-nowrap">SEE ALL</h1>
         </div>
-        <div class="w-full flex flex-row items-center justify-center text-center">
+        <div class="w-full flex flex-row items-center justify-center text-center p-4 ">
             <Carousel
                 :itemsToShow="carouselSettings.itemsToShow"
                 :itemsToScroll="carouselSettings.itemsToScroll"
@@ -59,12 +62,12 @@ export default {
                 v-model="currentSlide"
                 class=" w-full"
             >
-                <Slide v-for="(person, index) in people" :key="index">
-                    <div class="bg-white rounded-xl text-center items-center  w-16 sm:w-24 md:w-28 lg:w-36 xl:w-28 2xl:w-32 h-56 flex flex-col">
+                <Slide v-for="(person, index) in people" :key="index" style="">
+                    <div class="bg-white rounded-xl text-center items-center w-full flex flex-col m-2">
                         <div class="flex justify-end items-end  w-full">
                             <img src="/assets/icons/cancel.svg" alt="logo" class="h-8 justify-center">
                         </div>
-                        <div class="flex items-center justify-center text-center ">
+                        <div class="flex items-center justify-center text-center space-x-12">
                             <div v-if="person.role === 'Medical Doctor'" class="items-center justify-center text-center flex h-16 w-16 rounded-full border-transparent border-t-blue-500 border-b-yellow-500 bg-gradient-to-t from-yellow-500 via-green-500 to-blue-500">
                                 <img :src="person.avatar" alt="logo" class="h-14 w-14 border-white border-4 rounded-full">
                             </div>
@@ -80,12 +83,12 @@ export default {
                                 <h1>{{person.name}}</h1>
                                 <h1 class="text-yellow-400">{{person.role}}</h1>
                             </div>
-                            <div class=" flex flex-col items-center justify-end space-y-2">
+                            <div class=" flex flex-col items-center justify-end space-y-2 py-4 ">
                                 <p class="text-sm">{{person.location}}</p>
-                                <button v-if="person.role ==='Medical Doctor'" class="bg-yellow-400 rounded-xl px-4">
+                                <button v-if="person.role ==='Medical Doctor'" class="bg-yellow-400 text-white rounded-xl px-4">
                                     Follow
                                 </button>
-                                <button v-else class="bg-purple-400 rounded-xl px-4">
+                                <button v-else class="bg-purple-400 rounded-xl px-4 text-white">
                                     Follow
                                 </button>
                             </div>
@@ -94,7 +97,18 @@ export default {
                 </Slide>
 
                 <template #addons >
-                    <Navigation />
+                    <Navigation>
+                         <template #next>
+                            <div class="absolute top-0 left-10 bottom-0 flex items-center bg-white rounded-full ">
+                                <ArrowRight class="h-6 w-6 cursor-pointer " />
+                            </div>
+                        </template>
+                        <template #prev>
+                            <div class="absolute top-0 right-10 bottom-0 flex items-center bg-white rounded-full ">
+                                <ArrowLeft class="h-6 w-6cursor-pointer" />
+                            </div>
+                        </template>
+                    </Navigation>
                 </template>
             </Carousel>
         </div>

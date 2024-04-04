@@ -3,6 +3,8 @@ import Suggestions from './Suggestions.vue';
 import { Carousel, Navigation, Slide} from 'vue3-carousel';
 import 'vue3-carousel/dist/carousel.css'
 import cardServices from '../services/CardService.js';
+import Alert from './Alert.vue';
+
 
 export default {
     name: 'Cards',
@@ -11,6 +13,7 @@ export default {
         Carousel,
         Navigation,
         Slide,
+        Alert,
     },
     data() {
         return {
@@ -21,10 +24,20 @@ export default {
                 snapAlign: 'center',
             },
             cards: [],
+            isAlertVisible: false,
         }
     },
     mounted() {
         this.getCardData();
+    },
+    watch: {
+        isAlertVisible(newVal) {
+        if (newVal) {
+            setTimeout(() => {
+            this.isAlertVisible = false;
+            }, 3000); 
+        }
+        },
     },
     methods: {
         toggleLike(item) {
@@ -56,25 +69,29 @@ export default {
                 description: card.description,
                 tags: card.tags,
             }));
-        }
+        },
+        showAlert() {
+            this.isAlertVisible = true;
+        },
     }
 }
 </script>
 <template>
-    <div class=" flex flex-col pt-4 space-y-12">
+    <div class=" flex flex-col pt-4 space-y-12 z-1">
         <div v-for="item in cards" :key="item.id" >
+            <Alert :initialShow="isAlertVisible" /> 
             <div v-if="item.id === 2 " class="pb-12"> <Suggestions/></div>
             <div class="bg-white flex flex-col mt-2 mb-2 rounded-xl space-y-1">
-                <div :class="{'bg-gradient-to-r from-purple-200 to-blue-300 border-transparent ': item.role === 'SPONSORED', 'bg-white': item.role !== 'SPONSORED'}" class="flex flex-row justify-between px-4">
-                    <div class="flex space-x-4">
-                        <div v-if="item.role === 'Medical Doctor'" class="items-center justify-center flex h-16 w-16 rounded-full border-transparent border-t-blue-500 border-b-yellow-500 bg-gradient-to-t from-yellow-500 via-green-500 to-blue-500">
-                            <img :src="item.avatar" alt="logo" class=" h-14 w-14 border-white border-4 rounded-full">
+                <div :class="{'bg-gradient-to-r from-purple-200 to-blue-300 border-transparent ': item.role === 'SPONSORED', 'bg-white': item.role !== 'SPONSORED'}" class="flex flex-row items-center justify-between p-2">
+                    <div class="flex items-center space-x-4 ">
+                        <div v-if="item.role === 'Medical Doctor'" class="items-center justify-center flex h-12 w-12 rounded-full border-transparent  border-t-blue-500 border-b-yellow-500 bg-gradient-to-t from-yellow-500 via-green-500 to-blue-500">
+                            <img @click="showAlert" :src="item.avatar" alt="logo" class=" h-11 w-11 border-white border-2 rounded-full">
                         </div>
-                        <div v-else-if="item.role === 'SPONSORED'" class="items-center justify-center flex h-16 w-16 rounded-full border-red-300 border-2">
-                            <img :src="item.avatar" alt="logo" class=" h-14 w-14 border-white border-4 rounded-full">
+                        <div v-else-if="item.role === 'SPONSORED'" class="items-center justify-center flex h-12 w-12 rounded-full border-red-300 border-2">
+                            <img @click="showAlert" :src="item.avatar" alt="logo" class=" h-11 w-11 border-white border-2 rounded-full">
                         </div>
-                        <div v-else class="items-center justify-center flex h-16 w-16 rounded-full border-purple-300 border-2">
-                            <img :src="item.avatar" alt="logo" class=" h-14 w-14 border-white border-4 rounded-full">
+                        <div v-else class="items-center justify-center flex h-12 w-12 rounded-full border-purple-300 border-2">
+                            <img @click="showAlert" :src="item.avatar" alt="logo" class=" h-11 w-11 border-white border-2 rounded-full">
                         </div>
                         <div class="flex flex-col justify-center">
                             <h1 class="text-xl">{{item.name}}</h1>
@@ -83,14 +100,15 @@ export default {
                         </div>
                     </div>
                     <div class="flex items-center">
-                        <img src="/assets/icons/threedots.svg" alt="logo" class="h-8"/>
+                        <img @click="showAlert" src="/assets/icons/threedots.svg" alt="logo" class="h-8"/>
+                        <Alert :initialShow="isAlertVisible" /> 
                     </div>
                 </div>
                 
                 <div class="flex flex-col space-y-4">
                     <div class="flex flex-col">
                         <div v-if="item.role !== 'SPONSORED'" class="h-1 w-full bg-gradient-to-r from-yellow-500 via-green-500 to-blue-500 border-transparent "></div>
-                        <div v-if="item?.pictures && item.pictures.length > 1" class="w-fit h-fit  object-cover">
+                        <div v-if="item?.pictures && item.pictures.length > 1" class="w-fit h-fit object-cover">
                             
                            <Carousel
                                 :itemsToShow="carouselSettings.itemsToShow"
@@ -101,7 +119,7 @@ export default {
                                 :touchDrag="true"
                                 ref="carousel"
                                 v-model="currentSlide"
-                                class="z-50"
+                                class="z-1"
                             >
                                 <Slide v-for="(photo, index) in item.pictures" :key="index">
                                     <div class="z-50 justify-center items-center">
@@ -126,7 +144,7 @@ export default {
                         </div> 
                         <img v-else-if="item?.pictures" :src="item.pictures" alt="logo" class="w-full object-cover"/>
                     </div>
-                    <div class="flex flex-row justify-between">
+                    <div class="flex flex-row justify-between px-4">
                         <div class="flex flex-row space-x-4">
                             <div v-if="!item.isLiked" class="flex flex-col items-center">
                                 <img src="/assets/icons/emptyheart.svg" alt="empty heart" class="h-8" @click="toggleLike(item)" />
@@ -137,7 +155,7 @@ export default {
                                 <h1 class="text-lg">{{ item.likeCount }}</h1>
                             </div>
                             <div class="flex flex-col items-center">
-                                <img src="/assets/icons/share.svg" alt="share" class="h-8"/>
+                                <img @click="showAlert" src="/assets/icons/share.svg" alt="share" class="h-8"/>
                                 <h1 v-if="item.shareCount !== 0" class="text-lg">{{ item.shareCount }}</h1>
                             </div>
                         </div>
@@ -149,10 +167,20 @@ export default {
                         </div>
                     </div>
                     <div class="flex flex-col px-4 ">
-                        <div class="flex flex-row space-x-4">
-                            <p>{{item.minCount}} Min</p>
-                            <p>{{item.viewCount}} Views</p>
-                            <p>{{item.commentCount}} Comments</p>
+                        <div class="flex flex-row space-x-1">
+                            <div class=" flex flex-row space-x-1">
+                                <p class="text-xs">{{item.minCount}}</p>
+                                <p class="text-xs text-gray-400"> Min •</p>
+                            </div>
+                            
+                            <div class=" flex flex-row space-x-1">
+                                <p class="text-xs">{{item.viewCount}}</p>
+                                <p class="text-xs text-gray-400"> Views •</p>
+                            </div>
+                            <div class=" flex flex-row space-x-1">
+                                <p class="text-xs">{{item.commentCount}}</p>
+                                <p class="text-xs text-gray-400"> Comments</p>
+                            </div>
                         </div>
                         <div class="flex flex-row space-x-4">
                             <p class="font-bold">{{item.description}}</p>

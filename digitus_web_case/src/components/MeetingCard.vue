@@ -66,10 +66,53 @@ export default {
 
             <template #addons >
                 <Pagination 
-                class="mt-8 flex justify-center space-x-1"/>
+                class="mt-8 flex justify-center space-x-1">
+                </Pagination>
+
             </template>
 
         </Carousel> 
         
     </div>
 </template>
+
+<style >
+.carousel__pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    line-height: 0;
+    margin: 10px 0 0;
+    padding: 0;
+}
+
+.carousel__pagination-button {
+    display: block;
+    border: 0;
+    margin: 0;
+    width: 10px;
+    height: 10px;
+    cursor: pointer;
+    padding: var(--vc-pgn-margin);
+    background: transparent;
+}
+
+.carousel__pagination-button::after {
+    display: block;
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    background-color: '#818181';
+}
+
+.carousel__pagination-button--active::after {
+  background-color: purple;
+}
+
+@media(hover: hover) {
+  .carousel__pagination-button:hover::after {
+    background-color: purple;
+  }
+}
+</style>
