@@ -1,43 +1,59 @@
 <template>
-  <div v-if="show" class="fixed inset-0 flex justify-center items-center">
-    <div class="bg-blue-400 p-4 rounded-lg text-white absolute top-20">
-      <p>Not Implemented Yet!</p>
+  <div v-if="isVisible" class="fixed inset-0 flex justify-center top-10">
+    <div class="bg-blue-400 p-4 rounded-lg text-white absolute ">
+      <p> Not Implemented</p>
     </div>
   </div>
 </template>
 
-
 <script>
-import { ref, watch } from 'vue';
-
 export default {
-  props: {
-    initialShow: {
-      type: Boolean,
-      default: false,
+  data() {
+    return {
+      isVisible: false,
+      timerID: null,
+    };
+  },
+  mounted() {
+    this.isVisible = false;
+  },
+  computed: {
+    alertObject() {
+      console.log('computed')
+      return this.$store.state.alertObject;
     },
   },
-  setup(props) {
-    const show = ref(props.initialShow);
+  watch: {
+    '$store.state.alertObject.message': {
+      handler(newValue) {
+        console.log('watcher');
+        this.showAlert();
+      },
+      immediate: true,
+    },
+  },
+  methods: {
+    showAlert() {
+      this.isVisible = true;
+      this.timeout = 300;
+      this.hideAfterTimeout();
+      console.log('showAlert');
+    },
 
-    watch(
-      () => props.initialShow,
-      (newValue) => {
-        show.value = newValue;
-        if (newValue) {
-          setTimeout(() => {
-            show.value = false;
-          }, 3000);
-        }
+    hideAfterTimeout() {
+      if (this.timerID) {
+        clearTimeout(this.timerID);
       }
-    );
-    return {
-      show,
-    };
+      this.timerID = setTimeout(() => {
+        this.$store.dispatch('hideAlert');
+        this.isVisible = false;
+      }, this.timeout);
+    },
+    hideAlert() {
+      this.$store.dispatch('hideAlert');
+      this.isVisible = false;
+    },
   },
 };
 </script>
 
-<style>
-
-</style>

@@ -37,7 +37,10 @@ export default {
                 role: person.role,
                 location: person.location,
             }));
-        }
+        },
+        showAlert() {
+            this.$store.dispatch('showAlert', { message: 'Not Implemented' });
+        },
     }
 }
 </script>
@@ -48,7 +51,7 @@ export default {
             <div class="flex-1 w-full justify-center text-gray-500 text-base font-bold ">
                 <h1>Members You May Know</h1>
             </div>
-            <h1 class="absolute top-0 right-0 p-4 whitespace-nowrap">SEE ALL</h1>
+            <h1 @click="showAlert" class=" cursor-pointer absolute top-0 right-0 p-4 whitespace-nowrap">SEE ALL</h1>
         </div>
         <div class="w-full flex flex-row items-center justify-center text-center p-4 ">
             <Carousel
@@ -65,7 +68,7 @@ export default {
                 <Slide v-for="(person, index) in people" :key="index" style="">
                     <div class="bg-white rounded-xl text-center items-center w-full flex flex-col m-2">
                         <div class="flex justify-end items-end  w-full">
-                            <img src="/assets/icons/cancel.svg" alt="logo" class="h-8 justify-center">
+                            <img @click="showAlert" src="/assets/icons/cancel.svg" alt="logo" class="cursor-pointer h-8 justify-center">
                         </div>
                         <div class="flex items-center justify-center text-center space-x-12">
                             <div v-if="person.role === 'Medical Doctor'" class="items-center justify-center text-center flex h-16 w-16 rounded-full border-transparent border-t-blue-500 border-b-yellow-500 bg-gradient-to-t from-yellow-500 via-green-500 to-blue-500">
@@ -83,12 +86,12 @@ export default {
                                 <h1>{{person.name}}</h1>
                                 <h1 class="text-yellow-400">{{person.role}}</h1>
                             </div>
-                            <div class=" flex flex-col items-center justify-end space-y-2 py-4 ">
+                            <div class="  flex flex-col items-center justify-end space-y-2 py-4 ">
                                 <p class="text-sm">{{person.location}}</p>
-                                <button v-if="person.role ==='Medical Doctor'" class="bg-yellow-400 text-white rounded-xl px-4">
+                                <button v-if="person.role ==='Medical Doctor'" @click="showAlert" class="bg-yellow-400 text-white rounded-xl px-4">
                                     Follow
                                 </button>
-                                <button v-else class="bg-purple-400 rounded-xl px-4 text-white">
+                                <button v-else @click="showAlert" class="bg-purple-400 rounded-xl px-4 text-white">
                                     Follow
                                 </button>
                             </div>

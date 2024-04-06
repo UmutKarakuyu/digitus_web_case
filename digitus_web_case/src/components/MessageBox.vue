@@ -1,12 +1,8 @@
 <script >
 import cardServices from '../services/CardService.js';
 import profileServices from '../services/ProfileServices.js';
-import Alert from './Alert.vue';
 export default {
     name: 'MessageBox',
-    components: {
-        Alert,
-    },
     data() {
         return {
             user:{
@@ -56,12 +52,11 @@ export default {
                 tags: null,
             }
             cardServices.postCard(body).catch((error) => {
-                this.isAlertVisible = true;
+                this.$store.dispatch('showAlert', { message: 'Not Implemented' })
             });
         },
         showAlert() {
-            console.log("show alert")
-            this.isAlertVisible = true;
+        this.$store.dispatch('showAlert', { message: 'Not Implemented' });
         },
     }
 }
@@ -71,7 +66,7 @@ export default {
     <div class="bg-white flex flex-col p-4 rounded-xl space-y-4">
         <div class="flex flex-row space-x-4">
             <img src="/assets/images/profile_picture.png" alt="logo" class="h-16 object-cover rounded-full border-4 border-purple-100"/>
-            <input v-model="this.card.description" placeholder="Write something, Merve" class="w-full bg-gray-100 pl-8 text-xl"/>
+            <input v-model="this.card.description" placeholder="Write something, Merve" class="w-full bg-gray-100 pl-8 text-xl focus:outline-none"/>
         </div>
         <div class="flex flex-row justify-end space-x-4">
             <img @click="showAlert" src="/assets/icons/smile_emoji.svg" alt="logo" class="h-8"/>

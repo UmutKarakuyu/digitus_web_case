@@ -24,7 +24,6 @@ export default {
                 snapAlign: 'center',
             },
             cards: [],
-            isAlertVisible: false,
         }
     },
     mounted() {
@@ -71,15 +70,15 @@ export default {
             }));
         },
         showAlert() {
-            this.isAlertVisible = true;
+            this.$store.dispatch('showAlert', { message: 'Not Implemented' });
         },
     }
 }
 </script>
 <template>
     <div class=" flex flex-col pt-4 space-y-12 z-1">
+        
         <div v-for="item in cards" :key="item.id" >
-            <Alert :initialShow="isAlertVisible" /> 
             <div v-if="item.id === 2 " class="pb-12"> <Suggestions/></div>
             <div class="bg-white flex flex-col mt-2 mb-2 rounded-xl space-y-1">
                 <div :class="{'bg-gradient-to-r from-purple-200 to-blue-300 border-transparent ': item.role === 'SPONSORED', 'bg-white': item.role !== 'SPONSORED'}" class="flex flex-row items-center justify-between p-2">
@@ -100,8 +99,8 @@ export default {
                         </div>
                     </div>
                     <div class="flex items-center">
-                        <img @click="showAlert" src="/assets/icons/threedots.svg" alt="logo" class="h-8"/>
-                        <Alert :initialShow="isAlertVisible" /> 
+                        
+                        <img @click="showAlert" src="/assets/icons/threedots.svg" alt="logo" class="h-8 cursor-pointer"/>
                     </div>
                 </div>
                 
@@ -147,23 +146,23 @@ export default {
                     <div class="flex flex-row justify-between px-4">
                         <div class="flex flex-row space-x-4">
                             <div v-if="!item.isLiked" class="flex flex-col items-center">
-                                <img src="/assets/icons/emptyheart.svg" alt="empty heart" class="h-8" @click="toggleLike(item)" />
+                                <img src="/assets/icons/emptyheart.svg" alt="empty heart" class="cursor-pointer h-8" @click="toggleLike(item)" />
                                 <h1 class="text-lg">{{ item.likeCount }}</h1>
                             </div>
                             <div v-else class="flex flex-col items-center">
-                                <img src="/assets/icons/redheart.svg" alt="filled heart" class="h-8" @click="toggleLike(item)" />
+                                <img src="/assets/icons/redheart.svg" alt="filled heart" class="cursor-pointer h-8" @click="toggleLike(item)" />
                                 <h1 class="text-lg">{{ item.likeCount }}</h1>
                             </div>
                             <div class="flex flex-col items-center">
-                                <img @click="showAlert" src="/assets/icons/share.svg" alt="share" class="h-8"/>
+                                <img @click="showAlert" src="/assets/icons/share.svg" alt="share" class="cursor-pointer h-8"/>
                                 <h1 v-if="item.shareCount !== 0" class="text-lg">{{ item.shareCount }}</h1>
                             </div>
                         </div>
                         <div v-if="!item.isBookmarked" class="flex flex-col items-center">
-                            <img src="/assets/icons/emptybookmark.svg" alt="empty bookmark" class="h-8" @click="toggleBookmark(item)"/>
+                            <img src="/assets/icons/emptybookmark.svg" alt="empty bookmark" class="cursor-pointer h-8" @click="toggleBookmark(item)"/>
                         </div>
                         <div v-else class="flex flex-col items-center">
-                            <img src="/assets/icons/bluebookmark.svg" alt="filled bookmark" class="h-8" @click="toggleBookmark(item)"/>
+                            <img src="/assets/icons/bluebookmark.svg" alt="filled bookmark" class="cursor-pointer h-8" @click="toggleBookmark(item)"/>
                         </div>
                     </div>
                     <div class="flex flex-col px-4 ">
@@ -192,10 +191,11 @@ export default {
                 </div>
                 <div class="h-px bg-gray-500 bg-opacity-40 w-full"></div>
                 <div class="flex flex-row justify-between items-center ">
-                    <input type="text" placeholder="Comment This" class="w-full p-4 text-xl"/>
-                    <button class=" rounded-2xl border-2 text-gray-400 px-4 m-2">Post</button>
+                    <input type="text" placeholder="Comment This" class="w-full p-4 text-xl focus:outline-none"/>
+                    <button @click="showAlert" class=" rounded-2xl border-2 text-gray-400 px-4 m-2">Post</button>
                 </div>
             </div>
         </div>
+        <Alert />
     </div>
 </template>

@@ -34,7 +34,10 @@ export default {
                 date: card.date,
                 picture: card.picture,
             }));
-        }
+        },
+        showAlert() {
+            this.$store.dispatch('showAlert', { message: 'Not Implemented' });
+        },
     },
 }
 </script>
@@ -60,7 +63,7 @@ export default {
                     alt="carousel image"
                     class="object-cover w-full"
                     />
-                    <button class="rounded-2xl border-2 border-black-400 text-black-400 px-8 m-2">Join</button>
+                    <button @click="showAlert" class="rounded-2xl border-2 border-black-400 text-black-400 px-8 m-2">Join</button>
                 </div>
             </Slide>
 
