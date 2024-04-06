@@ -55,7 +55,7 @@ export default {
                 <div v-else-if="item.role === 'SPONSORED'" class="items-center justify-center flex h-9 w-9 rounded-full border-red-300 border-2">
                     <img :src="item.avatar" alt="logo" class=" h-8 w-8 border-white border-2 rounded-full">
                 </div>
-                <div v-else class="items-center justify-center flex h-9 w-9 rounded-full border-purple-300 border-2">
+                <div v-else class="items-center justify-center flex h-9 w-9 rounded-full vorder-opacity-50 border-[#A29BFE] border-2">
                     <img :src="item.avatar" alt="logo" class=" h-8 w-8 border-white border-2 rounded-full">
                 </div>
                 <div class="flex flex-col items-center justify-center">

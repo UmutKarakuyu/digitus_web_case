@@ -98,18 +98,17 @@ export default {
 }
 
 .carousel__pagination-button {
-    display: block;
+    display: flex;
     border: 0;
     margin: 0;
-    width: 10px;
-    height: 10px;
+    padding: 0;
     cursor: pointer;
     padding: var(--vc-pgn-margin);
-    background: transparent;
+    background: t;
 }
 
 .carousel__pagination-button::after {
-    display: block;
+    display: flex;
     content: '';
     width: 10px;
     height: 10px;
@@ -118,12 +117,16 @@ export default {
 }
 
 .carousel__pagination-button--active::after {
-  background-color: purple;
+    display: block;
+    width: 10px;
+    height: 10px;
+    background-color: #A29BFE;
 }
 
 @media(hover: hover) {
   .carousel__pagination-button:hover::after {
-    background-color: purple;
+    padding: var(--vc-pgn-margin);
+    background-color: #A29BFE;
   }
 }
 </style>

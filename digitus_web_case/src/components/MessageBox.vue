@@ -65,7 +65,7 @@ export default {
 <template>
     <div class="bg-white flex flex-col p-4 rounded-xl space-y-4">
         <div class="flex flex-row space-x-4">
-            <img src="/assets/images/profile_picture.png" alt="logo" class="h-16 object-cover rounded-full border-4 border-purple-100"/>
+            <img src="/assets/images/profile_picture.png" alt="logo" class="h-16 object-cover rounded-full border-2 border-opacity-50 border-[#A29BFE]"/>
             <input v-model="this.card.description" placeholder="Write something, Merve" class="w-full bg-gray-100 pl-8 text-base focus:outline-none"/>
         </div>
         <div class="flex flex-row justify-end space-x-4">

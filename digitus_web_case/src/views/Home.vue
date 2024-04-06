@@ -22,17 +22,19 @@ export default {
 <template>
   <div class=" justify-center">
     <Header/>
-    <div class="grid grid-cols-12 pt-24">
-      <div class="col-span-1 sm:col-span-1 md:col-span-1 lg:col-span-2 xl:col-span-3 2xl:col-span-3"></div>
-      <div class=" col-span-10 sm:col-span-10 md:col-span-6 lg:col-span-6 xl:col-span-5 2xl:col-span-5">
+    <div class="grid grid-cols-12 pt-24 gap-0 md:gap-16">
+      <div class="col-span-1 xl:col-span-2 2xl:col-span-3"></div>
+      <div class=" col-span-10 sm:col-span-10 md:col-span-7 lg:col-span-7 xl:col-span-6 2xl:col-span-4">
         <MessageBox/>
         <Cards/>
       </div>
-      <div class="col-span-1"></div>
-      <div class="col-span-1 md:col-span-3 lg:col-span-2 hidden sm:hidden md:flex lg:flex flex-col space-y-12">
+      <div class=" col-span-1 md:col-span-3 lg:col-span-3 xl:col-span-2 hidden sm:hidden md:flex lg:flex flex-col space-y-12">
         <SidebarCards/>
         <MeetingCard/>
       </div>
+
+
+      <div class="col-span-1 xl:col-span-2 2xl:col-span-3"></div>
       
     </div>
   </div>

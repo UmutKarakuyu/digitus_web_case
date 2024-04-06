@@ -77,7 +77,7 @@ export default {
         <div v-for="item in cards" :key="item.id" >
             <div v-if="item.id === 2 " class="pb-12"> <Suggestions/></div>
             <div class="bg-white flex flex-col mt-2 mb-2 rounded-xl space-y-1">
-                <div :class="{'bg-gradient-to-r from-purple-200 to-blue-300 border-transparent ': item.role === 'SPONSORED', 'bg-white': item.role !== 'SPONSORED'}" class="flex flex-row items-center justify-between p-2">
+                <div :class="{'bg-gradient-to-r from-[#A29BFE] to-blue-300 border-transparent ': item.role === 'SPONSORED', 'bg-white': item.role !== 'SPONSORED'}" class="flex flex-row items-center justify-between p-2">
                     <div class="flex items-center space-x-4 ">
                         <div v-if="item.role === 'Medical Doctor'" class="items-center justify-center flex h-12 w-12 rounded-full border-transparent  border-t-blue-500 border-b-yellow-500 bg-gradient-to-t from-yellow-500 via-green-500 to-blue-500">
                             <img @click="showAlert" :src="item.avatar" alt="logo" class=" h-11 w-11 border-white border-2 rounded-full">
@@ -85,7 +85,7 @@ export default {
                         <div v-else-if="item.role === 'SPONSORED'" class="items-center justify-center flex h-12 w-12 rounded-full border-red-300 border-2">
                             <img @click="showAlert" :src="item.avatar" alt="logo" class=" h-11 w-11 border-white border-2 rounded-full">
                         </div>
-                        <div v-else class="items-center justify-center flex h-12 w-12 rounded-full border-purple-300 border-2">
+                        <div v-else class="items-center justify-center flex h-12 w-12 rounded-full border-[#A29BFE] border-2">
                             <img @click="showAlert" :src="item.avatar" alt="logo" class=" h-11 w-11 border-white border-2 rounded-full">
                         </div>
                         <div class="flex flex-col justify-center">

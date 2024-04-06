@@ -20,6 +20,11 @@ export default {
             loading:true,
             breakpoints: {
                 100: {
+                    itemsToShow: 1,
+                    itemsToScroll: 1,  
+                    snapAlign: 'start',
+                },
+                400: {
                     itemsToShow: 2,
                     itemsToScroll: 2,  
                     snapAlign: 'start',
@@ -80,13 +85,13 @@ export default {
                             <img @click="showAlert" src="/assets/icons/cancel.svg" alt="logo" class="cursor-pointer h-8 justify-center">
                         </div>
                         <div class="flex items-center justify-center text-center space-x-12">
-                            <div v-if="person.role === 'Medical Doctor'" class="items-center justify-center text-center flex h-16 w-16 rounded-full border-transparent border-t-blue-500 border-b-yellow-500 bg-gradient-to-t from-yellow-500 via-green-500 to-blue-500">
+                            <div v-if="person.role === 'Medical Doctor'" class="items-center justify-center text-center flex h-16 w-16 rounded-full border-2 border-transparent border-t-blue-500 border-b-yellow-500 bg-gradient-to-t from-yellow-500 via-green-500 to-blue-500">
                                 <img :src="person.avatar" alt="logo" class="h-14 w-14 border-white border-4 rounded-full">
                             </div>
-                            <div v-else-if="person.role === 'SPONSORED'" class="items-center justify-center flex h-16 w-16 rounded-full border-red-300 border-4">
+                            <div v-else-if="person.role === 'SPONSORED'" class="items-center justify-center flex h-16 w-16 rounded-full border-red-300 border-2">
                                 <img :src="person.avatar" alt="logo" class="h-14 w-14 border-white border-4 rounded-full">
                             </div>
-                            <div v-else class="items-center justify-center flex h-16 w-16 rounded-full border-purple-300 border-4">
+                            <div v-else class="items-center justify-center flex h-16 w-16 rounded-full border-[#A29BFE] border-opacity-50 border-2">
                                 <img :src="person.avatar" alt="logo" class="h-14 w-14 border-white border-4 rounded-full">
                             </div>
                         </div>
@@ -100,7 +105,7 @@ export default {
                                 <button v-if="person.role ==='Medical Doctor'" @click="showAlert" class="bg-yellow-400 text-white rounded-xl px-4">
                                     Follow
                                 </button>
-                                <button v-else @click="showAlert" class="bg-purple-400 rounded-xl px-4 text-white">
+                                <button v-else @click="showAlert" class="bg-[#A29BFE] rounded-xl px-4 text-white">
                                     Follow
                                 </button>
                             </div>
