@@ -58,6 +58,7 @@ export default {
                 avatar: card.avatar,
                 role: card.role,
                 pictures: card.pictures,
+                video: card.video,
                 likeCount: card.likeCount,
                 shareCount: card.shareCount,
                 isLiked: card.isLiked,
@@ -142,6 +143,7 @@ export default {
                             </Carousel> 
                         </div> 
                         <img v-else-if="item?.pictures" :src="item.pictures" alt="logo" class="w-full object-cover"/>
+                        <iframe v-else-if="item?.video" :src="item.video" frameborder="0" allowfullscreen class=" object-cover w-full h-[19vh]" />
                     </div>
                     <div class="flex flex-row justify-between px-4">
                         <div class="flex flex-row space-x-4">

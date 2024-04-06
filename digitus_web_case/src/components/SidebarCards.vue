@@ -32,6 +32,7 @@ export default {
                 avatar: card.avatar,
                 role: card.role,
                 pictures: card.pictures,
+                video: card.video,
                 likeCount: card.likeCount,
                 commentCount: card.commentCount,
                 description: card.description,
@@ -61,6 +62,7 @@ export default {
                 <div class="flex flex-col">
                     <div v-if="item.role !== 'SPONSORED'" class="h-1 w-full bg-gradient-to-r from-yellow-500 via-green-500 to-blue-500 border-transparent "></div>
                     <img v-if="item.pictures !== null" :src="item.pictures" alt="logo" class="w-full"/>
+                    <iframe v-else-if="item?.video" :src="item.video" frameborder="0" allowfullscreen class=" object-cover w-full h-[10vh]" />
                 </div>
                 <div class="flex flex-col justify-start">
                     <p class="font-bold text-xs p-2">{{item.description}}</p>
