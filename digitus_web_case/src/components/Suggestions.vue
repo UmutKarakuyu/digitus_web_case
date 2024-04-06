@@ -16,13 +16,20 @@ export default {
     data() {
         return {
             currentSlide: 0,
-            carouselSettings: {
-                itemsToScroll: 3,  
-                itemsToShow: 3,
-                snapAlign: 'start',
-            },
             people:[],
             loading:true,
+            breakpoints: {
+                100: {
+                    itemsToShow: 2,
+                    itemsToScroll: 2,  
+                    snapAlign: 'start',
+                },
+                640: {
+                    itemsToShow: 3,
+                    itemsToScroll: 3, 
+                    snapAlign: 'start',
+                },
+            },
         }
     },
     mounted() {
@@ -50,18 +57,16 @@ export default {
 </script>
 
 <template>
-    <div class="bg-gray-200 flex flex-col text-center items-end rounded-xl ">
+    <div class="bg-gray-200 flex flex-col text-center items-end rounded-xl">
         <div class="relative flex flex-row  p-4 items-center w-full ">
             <div class="flex-1 w-full justify-center text-gray-500 text-base font-bold ">
                 <h1>Members You May Know</h1>
             </div>
-            <h1 @click="showAlert" class=" cursor-pointer absolute top-0 right-0 p-4 whitespace-nowrap">SEE ALL</h1>
+            <h1 @click="showAlert" class=" cursor-pointer absolute top-0 right-0 p-4 whitespace-nowrap hidden sm:flex">SEE ALL</h1>
         </div>
         <div v-if="!loading" class="w-full flex flex-row items-center justify-center text-center p-4 ">
             <Carousel
-                :itemsToShow="carouselSettings.itemsToShow"
-                :itemsToScroll="carouselSettings.itemsToScroll"
-                :snapAlign="carouselSettings.snapAlign"
+                :breakpoints="breakpoints"
                 :wrapAround="false"
                 :mouseDrag="true"
                 :touchDrag="true"

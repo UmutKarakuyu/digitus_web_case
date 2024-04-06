@@ -46,7 +46,7 @@ export default {
 }
 </script>
 <template>
-    <div class=" flex flex-col space-y-12  ">
+    <div class=" flex flex-col space-y-12 max-w-xs  ">
         <div v-if="!loading">
             <Carousel
             :itemsToShow="carouselSettings.itemsToShow"

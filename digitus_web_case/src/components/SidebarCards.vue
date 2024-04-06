@@ -46,7 +46,7 @@ export default {
 }
 </script>
 <template>
-    <div class=" flex flex-col space-y-12 ">
+    <div class=" flex flex-col space-y-12 max-w-xs ">
         <div v-for="item in cards" :key="item.id" class="bg-white" >
             <div class=" flex flex-row space-x-2 p-1">
                 <div v-if="item.role === 'Medical Doctor'" class="items-center justify-center flex h-9 w-9 rounded-full border-transparent border-t-blue-500 border-b-yellow-500 bg-gradient-to-t from-yellow-500 via-green-500 to-blue-500">
@@ -72,7 +72,7 @@ export default {
                     <img src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif" class="h-8"/>
                 </div>
                 <div class="flex flex-col justify-start">
-                    <p class="font-bold text-xs p-2">{{item.description}}</p>
+                    <p class="font-bold text-lg p-2">{{item.description}}</p>
                     <div class="flex flex-row justify-around ">
                         <div class=" flex flex-row space-x-1">
                             <p class="text-xs">{{ item.likeCount }}</p>

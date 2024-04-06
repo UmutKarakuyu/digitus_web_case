@@ -20,17 +20,20 @@ export default {
 </script>
 
 <template>
-  <div class="flex flex-row justify-center">
+  <div class=" justify-center">
     <Header/>
-    <div class="pt-24 space-x-24 flex flex-row w-full sm:w-full md:w-11/12 lg:w-10/12 xl:w-8/12 2xl:w-8/12 justify-center ">
-      <div class=" flex flex-col w-11/12 sm:w-11/12 md:w-6/12 lg:w-6/12 xl:w-6/12 2xl:w-6/12 space-y-12  ">
+    <div class="grid grid-cols-12 pt-24">
+      <div class="col-span-1 sm:col-span-1 md:col-span-1 lg:col-span-2 xl:col-span-3 2xl:col-span-3"></div>
+      <div class=" col-span-10 sm:col-span-10 md:col-span-6 lg:col-span-6 xl:col-span-5 2xl:col-span-5">
         <MessageBox/>
         <Cards/>
       </div>
-      <div class="hidden sm:hidden md:flex lg:flex xl:flex 2xl:flex flex-col w-2/12 sm:w-3/12 md:w-3/12 lg:w-3/12 xl:w-2/12 2xl:w-2/12 space-y-28 ">
+      <div class="col-span-1"></div>
+      <div class="col-span-1 md:col-span-3 lg:col-span-2 hidden sm:hidden md:flex lg:flex flex-col space-y-12">
         <SidebarCards/>
         <MeetingCard/>
       </div>
+      
     </div>
   </div>
 </template>
