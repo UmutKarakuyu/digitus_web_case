@@ -22,6 +22,7 @@ export default {
                 snapAlign: 'start',
             },
             people:[],
+            loading:true,
         }
     },
     mounted() {
@@ -37,6 +38,9 @@ export default {
                 role: person.role,
                 location: person.location,
             }));
+            setTimeout(() => { // fake fetch data delay
+                this.loading = false;
+            }, 1000);
         },
         showAlert() {
             this.$store.dispatch('showAlert', { message: 'Not Implemented' });
@@ -53,7 +57,7 @@ export default {
             </div>
             <h1 @click="showAlert" class=" cursor-pointer absolute top-0 right-0 p-4 whitespace-nowrap">SEE ALL</h1>
         </div>
-        <div class="w-full flex flex-row items-center justify-center text-center p-4 ">
+        <div v-if="!loading" class="w-full flex flex-row items-center justify-center text-center p-4 ">
             <Carousel
                 :itemsToShow="carouselSettings.itemsToShow"
                 :itemsToScroll="carouselSettings.itemsToScroll"
@@ -83,8 +87,8 @@ export default {
                         </div>
                         <div class="whitespace-nowrap space-y-2">
                             <div class="h-14 sm:h-14 pt-2">
-                                <h1>{{person.name}}</h1>
-                                <h1 class="text-yellow-400">{{person.role}}</h1>
+                                <p>{{person.name}}</p>
+                                <p class="text-yellow-400">{{person.role}}</p>
                             </div>
                             <div class="  flex flex-col items-center justify-end space-y-2 py-4 ">
                                 <p class="text-sm">{{person.location}}</p>
@@ -114,6 +118,9 @@ export default {
                     </Navigation>
                 </template>
             </Carousel>
+        </div>
+        <div v-else class="w-full h-32 flex justify-center items-center">
+            <img src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif" class="h-8"/>
         </div>
     </div>
 </template>

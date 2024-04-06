@@ -18,6 +18,7 @@ export default {
     data() {
         return {
             currentSlide: 0,
+            loading: true,
             carouselSettings: {
                 itemsToScroll: 1,  
                 itemsToShow: 1,
@@ -28,15 +29,6 @@ export default {
     },
     mounted() {
         this.getCardData();
-    },
-    watch: {
-        isAlertVisible(newVal) {
-        if (newVal) {
-            setTimeout(() => {
-            this.isAlertVisible = false;
-            }, 3000); 
-        }
-        },
     },
     methods: {
         toggleLike(item) {
@@ -69,6 +61,9 @@ export default {
                 description: card.description,
                 tags: card.tags,
             }));
+            setTimeout(() => { // fake fetch data delay
+                this.loading = false;
+            }, 1000);
         },
         showAlert() {
             this.$store.dispatch('showAlert', { message: 'Not Implemented' });
@@ -107,52 +102,57 @@ export default {
                 
                 <div class="flex flex-col space-y-4">
                     <div class="flex flex-col">
-                        <div v-if="item.role !== 'SPONSORED'" class="h-1 w-full bg-gradient-to-r from-yellow-500 via-green-500 to-blue-500 border-transparent "></div>
-                        <div v-if="item?.pictures && item.pictures.length > 1" class="w-fit h-fit object-cover">
-                            
-                           <Carousel
-                                :itemsToShow="carouselSettings.itemsToShow"
-                                :itemsToScroll="carouselSettings.itemsToScroll"
-                                :snapAlign="carouselSettings.snapAlign"
-                                :wrapAround="true"
-                                :mouseDrag="true"
-                                :touchDrag="true"
-                                ref="carousel"
-                                v-model="currentSlide"
-                                class="z-1"
-                            >
-                                <Slide v-for="(photo, index) in item.pictures" :key="index">
-                                    <div class="z-50 justify-center items-center">
-                                        <div class=" absolute top-10 right-5 transform translate-x-1/4 -translate-y-1/4 items-center">
-                                        <img src="/assets/icons/pages.svg" alt="logo" class="h-8"/>
-                                    </div>
-                                    <div class="absolute top-11 right-6 transform translate-x-1/4 -translate-y-1/4 items-center ">
-                                        <h1 class="text-white ">{{ item.pictures.length }}</h1>
-                                    </div>
-                                        <img
-                                        :src="photo"
-                                        alt="carousel image"
-                                        class="object-cover w-full"
-                                        />
-                                    </div>
-                                </Slide>
+                        <div v-if="!loading">
+                            <div v-if="item.role !== 'SPONSORED'" class="h-1 w-full bg-gradient-to-r from-yellow-500 via-green-500 to-blue-500 border-transparent "></div>
+                            <div v-if="item?.pictures && item.pictures.length > 1" class="w-fit h-fit object-cover relative">
+                                <div class=" absolute z-10 top-8 right-4 transform translate-x-1/4 -translate-y-1/4 items-center">
+                                    <img src="/assets/icons/pages.svg" alt="logo" class="h-8"/>
+                                </div>
+                                <div class="absolute z-10 top-9 right-5 transform translate-x-1/4 -translate-y-1/4 items-center ">
+                                    <h1 class="text-white ">{{ item.pictures.length }}</h1>
+                                </div>
+                                <Carousel
+                                        :itemsToShow="carouselSettings.itemsToShow"
+                                        :itemsToScroll="carouselSettings.itemsToScroll"
+                                        :snapAlign="carouselSettings.snapAlign"
+                                        :wrapAround="true"
+                                        :mouseDrag="true"
+                                        :touchDrag="true"
+                                        ref="carousel"
+                                        v-model="currentSlide"
+                                        style="z-index: 0;"
+                                >
+                                    <Slide v-for="(photo, index) in item.pictures" :key="index">
+                                        <div class=" justify-center items-center">
+                                            <img
+                                            :src="photo"
+                                            alt="carousel image"
+                                            class="object-cover w-full"
+                                            />
+                                        </div>
+                                    </Slide>
 
-                                <template #addons >
-                                    <Navigation />
-                                </template>
-                            </Carousel> 
-                        </div> 
-                        <img v-else-if="item?.pictures" :src="item.pictures" alt="logo" class="w-full object-cover"/>
-                        <iframe v-else-if="item?.video" :src="item.video" frameborder="0" allowfullscreen class=" object-cover w-full h-[19vh]" />
+                                    <template #addons >
+                                        <Navigation />
+                                    </template>
+                                </Carousel> 
+                            </div> 
+                            <img v-else-if="item?.pictures" :src="item.pictures" alt="logo" class="w-full object-cover"/>
+                            <iframe v-else-if="item?.video" :src="item.video" frameborder="0" allowfullscreen class=" object-cover w-full h-64" />
+                        </div>
+                        <div v-else class="w-full h-64 flex justify-center items-center">
+                            <img src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif" class="h-16"/>
+                        </div>
+                       
                     </div>
                     <div class="flex flex-row justify-between px-4">
                         <div class="flex flex-row space-x-4">
-                            <div v-if="!item.isLiked" class="flex flex-col items-center">
-                                <img src="/assets/icons/emptyheart.svg" alt="empty heart" class="cursor-pointer h-8" @click="toggleLike(item)" />
+                            <div v-if="!item.isLiked" class="flex flex-col items-center cursor-pointer">
+                                <img src="/assets/icons/emptyheart.svg" alt="empty heart" class=" h-8" @click="toggleLike(item)" />
                                 <h1 class="text-lg">{{ item.likeCount }}</h1>
                             </div>
-                            <div v-else class="flex flex-col items-center">
-                                <img src="/assets/icons/redheart.svg" alt="filled heart" class="cursor-pointer h-8" @click="toggleLike(item)" />
+                            <div v-else class="flex flex-col items-center cursor-pointer">
+                                <img src="/assets/icons/redheart.svg" alt="filled heart" class=" h-8" @click="toggleLike(item)" />
                                 <h1 class="text-lg">{{ item.likeCount }}</h1>
                             </div>
                             <div class="flex flex-col items-center">

@@ -19,6 +19,7 @@ export default {
                 snapAlign: 'start',
             },
             card:[],
+            loading: true,
         }
     },
     mounted() {
@@ -34,6 +35,9 @@ export default {
                 date: card.date,
                 picture: card.picture,
             }));
+            setTimeout(() => { // fake fetch data delay
+                this.loading = false;
+            }, 1000);
         },
         showAlert() {
             this.$store.dispatch('showAlert', { message: 'Not Implemented' });
@@ -43,7 +47,8 @@ export default {
 </script>
 <template>
     <div class=" flex flex-col space-y-12  ">
-        <Carousel
+        <div v-if="!loading">
+            <Carousel
             :itemsToShow="carouselSettings.itemsToShow"
             :itemsToScroll="carouselSettings.itemsToScroll"
             :snapAlign="carouselSettings.snapAlign"
@@ -75,7 +80,10 @@ export default {
             </template>
 
         </Carousel> 
-        
+        </div>
+        <div v-else class="w-full h-32 flex justify-center items-center">
+            <img src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif" class="h-8"/>
+        </div>
     </div>
 </template>
 
