@@ -66,7 +66,7 @@ export default {
                 <div v-if="!loading" class="flex flex-col">
                     <div v-if="item.role !== 'SPONSORED'" class="h-1 w-full bg-gradient-to-r from-yellow-500 via-green-500 to-blue-500 border-transparent "></div>
                     <img v-if="item.pictures !== null" :src="item.pictures" alt="logo" class="w-full"/>
-                    <iframe v-else-if="item?.video" :src="item.video" frameborder="0" allowfullscreen class=" object-cover w-full h-[10vh]" />
+                    <iframe v-else-if="item?.video" :src="item.video" frameborder="0" allowfullscreen class=" object-cover w-full aspect-video" />
                 </div>
                 <div v-else class="w-full h-32 flex justify-center items-center">
                     <img src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif" class="h-8"/>

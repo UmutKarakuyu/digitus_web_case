@@ -59,7 +59,7 @@ const cardServices = {
                         '/assets/images/avatar5.png',
                     role: null,
                     pictures: null,
-                    video: 'https://www.youtube.com/embed/BD3TaRvJa-o?controls=0' ,
+                    video: 'https://www.youtube.com/embed/BD3TaRvJa-o?&mute=1&controls=1&fs=0&autoplay=1' ,
                     likeCount: 24,
                     shareCount: 0,
                     isLiked:true,

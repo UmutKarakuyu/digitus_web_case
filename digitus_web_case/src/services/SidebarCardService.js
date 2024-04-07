@@ -31,7 +31,7 @@ const sidebarCardServices = {
                     '/assets/images/avatar1.png',
                 role: 'Medical Doctor',
                 pictures: null,
-                video: 'https://www.youtube.com/embed/0-xHoP9OZY4?&mute=1&controls=0',
+                video: 'https://www.youtube.com/embed/0-xHoP9OZY4?&mute=1&controls=0&fs=0&autoplay=1',
                 likeCount: 2,
                 commentCount: 324,
                 description: 'Yoga programs for early pregnants',

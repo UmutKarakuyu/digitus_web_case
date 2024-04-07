@@ -77,7 +77,7 @@ export default {
         <div v-for="item in cards" :key="item.id" >
             <div v-if="item.id === 2 " class="pb-12"> <Suggestions/></div>
             <div class="bg-white flex flex-col mt-2 mb-2 rounded-xl space-y-1">
-                <div :class="{'bg-gradient-to-r from-[#A29BFE] to-blue-300 border-transparent ': item.role === 'SPONSORED', 'bg-white': item.role !== 'SPONSORED'}" class="flex flex-row items-center justify-between p-2">
+                <div :class="{'bg-gradient-to-r from-[#A29BFE] to-blue-300 border-transparent ': item.role === 'SPONSORED', 'bg-white': item.role !== 'SPONSORED'}" class="flex flex-row items-center rounded-xl justify-between p-2">
                     <div class="flex items-center space-x-4 ">
                         <div v-if="item.role === 'Medical Doctor'" class="items-center justify-center flex h-12 w-12 rounded-full border-transparent  border-t-blue-500 border-b-yellow-500 bg-gradient-to-t from-yellow-500 via-green-500 to-blue-500">
                             <img @click="showAlert" :src="item.avatar" alt="logo" class=" h-11 w-11 border-white border-2 rounded-full">
@@ -138,12 +138,15 @@ export default {
                                 </Carousel> 
                             </div> 
                             <img v-else-if="item?.pictures" :src="item.pictures" alt="logo" class="w-full object-cover"/>
-                            <iframe v-else-if="item?.video" :src="item.video" frameborder="0" allowfullscreen class=" object-cover w-full h-64" />
+                            <iframe v-else-if="item?.video" :src="item.video" frameborder="0" allowfullscreen class=" object-cover w-full aspect-video" />
                         </div>
                         <div v-else class="w-full h-64 flex justify-center items-center">
                             <img src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif" class="h-16"/>
                         </div>
                        
+                    </div>
+                    <div v-if="!item.pictures && !item.video" class="flex flex-row px-4 text-justify">
+                            <p class="font-bold">{{item.description}}</p>
                     </div>
                     <div class="flex flex-row justify-between px-4">
                         <div class="flex flex-row space-x-4">
@@ -183,7 +186,7 @@ export default {
                                 <p class="text-xs text-gray-400"> Comments</p>
                             </div>
                         </div>
-                        <div class="flex flex-row space-x-4">
+                        <div v-if="item.pictures || item.video" class="flex flex-row space-x-4 text-justify">
                             <p class="font-bold">{{item.description}}</p>
                         </div>
                         <div class="flex flex-row space-x-4">
@@ -191,9 +194,9 @@ export default {
                         </div>
                     </div>
                 </div>
-                <div class="h-px bg-gray-500 bg-opacity-40 w-full"></div>
+                <div class="h-px bg-gray-500 bg-opacity-40 w-full "></div>
                 <div class="flex flex-row justify-between items-center ">
-                    <input type="text" placeholder="Comment This" class="w-full p-4 text-xl focus:outline-none"/>
+                    <input type="text" placeholder="Comment This" class="w-full p-4 text-xl focus:outline-none rounded-xl "/>
                     <button @click="showAlert" class=" rounded-2xl border-2 text-gray-400 px-4 m-2">Post</button>
                 </div>
             </div>

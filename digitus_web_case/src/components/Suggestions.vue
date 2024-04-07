@@ -2,7 +2,7 @@
 import suggestionServices from '../services/SuggestionService.js';
 import { Carousel, Navigation, Slide} from 'vue3-carousel';
 import 'vue3-carousel/dist/carousel.css';
-import { ArrowLeft, ArrowRight } from '@iconoir/vue';
+import { NavArrowLeft, NavArrowRight } from '@iconoir/vue';
 
 export default {
     name: 'Cards',
@@ -10,8 +10,8 @@ export default {
         Carousel,
         Navigation,
         Slide,
-        ArrowLeft,
-        ArrowRight,
+        NavArrowLeft,
+        NavArrowRight,
     },
     data() {
         return {
@@ -117,12 +117,12 @@ export default {
                     <Navigation>
                          <template #next>
                             <div class="absolute top-0 left-10 bottom-0 flex items-center bg-white rounded-full ">
-                                <ArrowRight class="h-6 w-6 cursor-pointer " />
+                                <NavArrowRight class="h-6 w-6 cursor-pointer text-gray-500 " />
                             </div>
                         </template>
                         <template #prev>
                             <div class="absolute top-0 right-10 bottom-0 flex items-center bg-white rounded-full ">
-                                <ArrowLeft class="h-6 w-6cursor-pointer" />
+                                <NavArrowLeft class="h-6 w-6 cursor-pointer text-gray-500" />
                             </div>
                         </template>
                     </Navigation>
